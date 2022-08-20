@@ -33,10 +33,17 @@ func main() {
 	)
 	failOnError(err, "Failed to declare queue")
 
+	err = ch.Qos(
+		1,
+		0,
+		false,
+	)
+	failOnError(err, "Failed to set QoS")
+
 	msg, err := ch.Consume(
 		q.Name,
 		"",
-		true,
+		false,
 		false,
 		false,
 		false,
@@ -54,6 +61,8 @@ func main() {
 			t := time.Duration(dotCount)
 			time.Sleep(t * time.Second)
 			log.Printf("Done")
+
+			d.Ack(false)
 		}
 	}()
 

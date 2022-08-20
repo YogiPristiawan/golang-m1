@@ -25,7 +25,7 @@ func main() {
 
 	q, err := ch.QueueDeclare(
 		"tasks",
-		false,
+		true,
 		false,
 		false,
 		false,
